@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Design AID Engineering | Precision Engineering Partners</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --primary: #0a0e27;
+  --accent: #0066ff;
+  --gold: #d4af37;
+  --light: #f8f9fa;
+  --gray: #6c757d;
+  --dark: #070a1a;
+  --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; color: var(--primary); background: var(--light); overflow-x: hidden; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--light); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 5px; }
+
+.floating-contact {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 9999;
+}
+.float-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transition: all 0.4s var(--transition);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.float-btn:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+.whatsapp-btn { background: #25D366; animation: pulse-green 2s infinite; }
+.call-btn { background: var(--accent); animation: pulse-blue 2s infinite; }
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+}
+@keyframes pulse-blue {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 102, 255, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(0, 102, 255, 0); }
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.4s var(--transition);
+  background: transparent;
+}
+nav.scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+  padding: 15px 60px;
+}
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.logo-box {
+  width: 100px;
+  height: 100px;
+  background: white;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  padding: 15px;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s;
+}
+.logo-box:hover { transform: translateY(-3px); box-shadow: 0 20px 60px rgba(0,102,255,0.2); }
+nav.scrolled .logo-box { width: 70px; height: 70px; padding: 10px; }
+.logo-box img { width: 100%; height: 100%; object-fit: contain; }
+.logo-text h1 { font-size: 26px; font-weight: 800; letter-spacing: -1px; margin: 0; line-height: 1.2; }
+.logo-text span { font-size: 13px; color: var(--gray); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+.nav-links { display: flex; gap: 40px; align-items: center; }
+.nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 15px; position: relative; padding: 8px 0; transition: color 0.3s; }
+.nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; }
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta { background: var(--primary); color: white !important; padding: 14px 32px !important; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s !important; }
+.nav-cta:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,102,255,0.3); }
+.nav-cta::after { display: none !important; }
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f4b 100%);
+  overflow: hidden;
+  padding: 0 60px;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('cta-bg.jpg.avif') center/cover no-repeat;
+  opacity: 0.4;
+  animation: slowZoom 20s infinite alternate;
+}
+@keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 50%, transparent 0%, rgba(10,14,39,0.9) 70%);
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin-top: 80px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  padding: 10px 20px;
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 50px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+.hero h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 700;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 30px;
+  letter-spacing: -2px;
+}
+.hero h2 em {
+  color: var(--accent);
+  font-style: normal;
+  position: relative;
+}
+.hero h2 em::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: var(--accent);
+  opacity: 0.3;
+  z-index: -1;
+}
+.hero p {
+  font-size: 22px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.6;
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+.hero-btns { display: flex; gap: 20px; flex-wrap: wrap; }
+.btn {
+  padding: 18px 36px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.4s var(--transition);
+  border: none;
+  cursor: pointer;
+}
+.btn-white { background: white; color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+.btn-white:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+.btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.3); }
+.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: white; transform: translateY(-3px); }
+
+.about-section {
+  padding: 150px 60px;
+  background: white;
+  position: relative;
+}
+.about-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+.about-images {
+  position: relative;
+  height: 600px;
+}
+.about-img-main {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  border-radius: 30px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+  z-index: 2;
+  top: 0;
+  left: 0;
+}
+.about-img-secondary {
+  position: absolute;
+  width: 50%;
+  height: 40%;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  z-index: 3;
+  bottom: 0;
+  right: 0;
+  border: 5px solid white;
+}
+.about-badge {
+  position: absolute;
+  bottom: 20%;
+  left: -30px;
+  background: var(--accent);
+  color: white;
+  padding: 30px;
+  border-radius: 20px;
+  z-index: 4;
+  box-shadow: 0 10px 30px rgba(0,102,255,0.3);
+  text-align: center;
+}
+
+.about-badge .num { font-size: 48px; font-weight: 900; display: block; line-height: 1; }
+.about-badge .text { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.about-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  line-height: 1.2;
+}
+.about-content > p {
+  font-size: 18px;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+.stat-item h3 { font-size: 36px; font-weight: 800; color: var(--accent); margin-bottom: 5px; }
+.stat-item p { font-size: 14px; color: var(--gray); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+.section-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.sec-tag {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  padding: 10px 24px;
+  background: rgba(0,102,255,0.1);
+  border-radius: 50px;
+}
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.sec-subtitle {
+  color: var(--gray);
+  font-size: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.industries-section { padding: 150px 60px; background: var(--light); }
+.industries-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.ind-card {
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  height: 500px;
+  cursor: pointer;
+}
+.ind-large { grid-column: span 7; height: 600px; }
+.ind-medium { grid-column: span 5; height: 600px; }
+.ind-small { grid-column: span 4; height: 400px; }
+.ind-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.8s, filter 0.4s;
+}
+.ind-card:hover .ind-bg {
+  transform: scale(1.1);
+  filter: brightness(0.7);
+}
+.ind-1 .ind-bg { background-image: url('industrial.jpg.jpg'); }
+.ind-2 .ind-bg { background-image: url('transportation.jpg'); }
+.ind-3 .ind-bg { background-image: url('healthcare.jpg'); }
+.ind-4 .ind-bg { background-image: url('aerospace.jpg'); }
+.ind-5 .ind-bg { background-image: url('electromechanical.jpg'); }
+
+.ind-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,14,39,0.95) 0%, rgba(10,14,39,0.3) 50%, transparent 100%);
+  transition: all 0.4s;
+}
+.ind-card:hover .ind-overlay {
+  background: linear-gradient(to top, rgba(10,14,39,0.98) 0%, rgba(0,102,255,0.2) 100%);
+}
+.ind-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px;
+  color: white;
+  transform: translateY(20px);
+  transition: transform 0.4s;
+}
+.ind-card:hover .ind-content { transform: translateY(0); }
+.ind-num {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  display: block;
+}
+.ind-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.ind-desc {
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s 0.1s;
+  max-width: 90%;
+}
+.ind-card:hover .ind-desc { opacity: 1; transform: translateY(0); }
+
+.services-section { padding: 150px 60px; background: white; }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.service-card {
+  background: var(--light);
+  border-radius: 24px;
+  padding: 40px;
+  transition: all 0.4s;
+  border: 1px solid rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+}
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+  background: white;
+}
+.service-card.featured {
+  background: var(--primary);
+  color: white;
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.service-img {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+  border-radius: 16px;
+  margin-top: 20px;
+  overflow: hidden;
+  position: relative;
+}
+.service-img img { width: 100%; height: 100%; object-fit: cover; }
+.service-tag { font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 15px; display: block; }
+.service-card.featured .service-tag { color: var(--gold); }
+.service-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; margin-bottom: 20px; }
+.service-text { color: var(--gray); line-height: 1.8; font-size: 15px; }
+.service-card.featured .service-text { color: rgba(255,255,255,0.8); }
+
+.process-section { padding: 150px 60px; background: var(--primary); color: white; position: relative; overflow: hidden; }
+.process-section::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255,255,255,0.1);
+  transform: translateX(-50%);
+}
+.process-container { max-width: 1000px; margin: 0 auto; position: relative; z-index: 2; }
+.process-header { text-align: center; margin-bottom: 100px; }
+.process-header h2 { font-family: 'Playfair Display', serif; font-size: 56px; margin: 20px 0; }
+.timeline-item {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 60px;
+  margin-bottom: 80px;
+  align-items: center;
+}
+.timeline-item:nth-child(even) .timeline-content { grid-column: 3; text-align: left; }
+.timeline-item:nth-child(even) .timeline-dot { grid-column: 2; }
+.timeline-item:nth-child(odd) .timeline-content { text-align: right; grid-column: 1; }
+.timeline-dot {
+  width: 80px;
+  height: 80px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 0 0 20px rgba(0,102,255,0.1), 0 0 0 40px rgba(0,102,255,0.05);
+  position: relative;
+  z-index: 3;
+}
+.timeline-content h3 { font-size: 28px; font-weight: 700; margin-bottom: 15px; }
+.timeline-content p { color: rgba(255,255,255,0.7); line-height: 1.7; font-size: 16px; }
+.timeline-img {
+  width: 100%;
+  height: 250px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+.timeline-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.cta-section {
+  background: linear-gradient(135deg, var(--accent) 0%, #0051cc 100%);
+  padding: 150px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-bg {
+  position: absolute;
+  inset: 0;
+  background: url('hero-bg.jpg') center/cover;
+  opacity: 0.1;
+}
+.cta-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+.cta-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(40px, 5vw, 64px); color: white; margin-bottom: 30px; }
+.cta-section p { color: rgba(255,255,255,0.9); font-size: 22px; line-height: 1.6; margin-bottom: 50px; }
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  padding: 25px 50px;
+  background: white;
+  color: var(--accent);
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  transition: all 0.4s;
+}
+.cta-btn:hover { transform: translateY(-5px); box-shadow: 0 30px 80px rgba(0,0,0,0.4); }
+
+.contact-section { display: grid; grid-template-columns: 1fr 1fr; min-height: 700px; }
+.contact-left {
+  background: var(--primary);
+  color: white;
+  padding: 100px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.contact-left h2 { font-family: 'Playfair Display', serif; font-size: 56px; margin-bottom: 40px; line-height: 1.1; }
+.contact-left > p { color: rgba(255,255,255,0.7); font-size: 20px; line-height: 1.7; margin-bottom: 50px; }
+.contact-item { display: flex; align-items: flex-start; gap: 25px; margin-bottom: 40px; }
+.contact-icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s;
+}
+.contact-item:hover .contact-icon {
+  background: var(--accent);
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+.contact-item h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: var(--gold); margin-bottom: 8px; font-weight: 700; }
+.contact-item p { font-size: 20px; font-weight: 600; }
+.contact-item a { color: white; text-decoration: none; transition: color 0.3s; }
+.contact-item a:hover { color: var(--accent); }
+.contact-right {
+  position: relative;
+  background: var(--light);
+}
+.map-container {
+  position: absolute;
+  inset: 0;
+}
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(100%) contrast(1.1);
+  transition: filter 0.4s;
+}
+.map-container:hover iframe {
+  filter: grayscale(0%);
+}
+
+footer {
+  background: var(--dark);
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 60px;
+  font-size: 15px;
+}
+.footer-content { max-width: 1200px; margin: 0 auto; }
+.footer-logo { width: 80px; height: 80px; background: white; border-radius: 20px; margin: 0 auto 30px; padding: 15px; }
+.footer-logo img { width: 100%; height: 100%; object-fit: contain; }
+.social-links { display: flex; justify-content: center; gap: 20px; margin: 30px 0; }
+.social-links a {
+  width: 50px;
+  height: 50px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  transition: all 0.3s;
+}
+.social-links a:hover {
+  background: var(--accent);
+  transform: translateY(-3px);
+}
+
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .about-container { grid-template-columns: 1fr; }
+  .about-images { height: 400px; margin-bottom: 40px; }
+  .ind-card { grid-column: span 12 !important; height: 400px !important; }
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card.featured { grid-column: span 1; display: flex; flex-direction: column; }
+  .contact-section { grid-template-columns: 1fr; }
+  .contact-right { height: 400px; }
+  .timeline-item { grid-template-columns: 1fr; gap: 30px; }
+  .timeline-item:nth-child(even) .timeline-content,
+  .timeline-item:nth-child(odd) .timeline-content { grid-column: 1; text-align: left; }
+  .timeline-dot { grid-column: 1 !important; justify-self: start; }
+  .process-section::before { left: 40px; }
+  h2 { font-size: 36px !important; }
+}
+@media (max-width: 768px) {
+  .hero, .about-section, .industries-section, .services-section, .process-section, .cta-section { padding: 80px 30px; }
+  .floating-contact { right: 20px; bottom: 20px; }
+  .float-btn { width: 50px; height: 50px; font-size: 20px; }
+  .contact-left { padding: 60px 30px; }
+}
+</style>
+</head>
+<body>
+
+<!-- FLOATING CONTACT BUTTONS -->
+<div class="floating-contact">
+  <a href="https://wa.me/919611391279?text=Hello%20Design%20AID%20Engineering%2C%20I%20am%20interested%20in%20your%20engineering%20services.%20Please%20provide%20more%20information." class="float-btn whatsapp-btn" target="_blank" title="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <a href="tel:+919611391279" class="float-btn call-btn" title="Call Us">
+    <i class="fas fa-phone"></i>
+  </a>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <div class="logo-wrap">
+    <div class="logo-box">
+      <img src="logo.png.svg.svg" alt="Design AID Engineering">
+    </div>
+    <div class="logo-text">
+      <h1>Design AID</h1>
+      <span>Engineering Excellence</span>
+    </div>
+  </div>
+  
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#industries">Industries</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="nav-cta">Get Quote</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  
+  <div class="hero-content">
+    <div class="hero-badge">
+      <i class="fas fa-award"></i> Trusted Engineering Partner
+    </div>
+    <h2>Concept to <em>Production</em></h2>
+    <p>End-to-end engineering excellence. From aerospace components to medical devices, we deliver uncompromising quality at scale.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/919611391279?text=Hello%20Design%20AID%20Engineering%2C%20I%20am%20interested%20in%20your%20engineering%20services.%20Please%20provide%20more%20information." class="btn btn-white" target="_blank">
+        <i class="fab fa-whatsapp"></i> Start on WhatsApp
+      </a>
+      <a href="#about" class="btn btn-outline">
+        <i class="fas fa-play-circle"></i> Learn More
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section class="about-section" id="about">
+  <div class="about-container">
+    <div class="about-images">
+      <img src="cta-bg.jpg.avif" alt="Engineering Team" class="about-img-main">
+      <img src="about-secondary.jpg" alt="Workshop" class="about-img-secondary">
+      <div class="about-badge">
+        <span class="num">15+</span>
+        <span class="text">Years<br>Excellence</span>
+      </div>
+    </div>
+    
+    <div class="about-content">
+      <div class="sec-tag">About Us</div>
+      <h2>Engineering Vision,<br>Delivered</h2>
+      <p>Design AID Engineering is a premier engineering services company specializing in end-to-end R&D solutions. With a strong foundation in design and technical expertise, we provide comprehensive product development support through a global delivery model.</p>
+      <p>Our multidisciplinary team combines innovation with efficiency, reducing costs and accelerating time-to-market while maintaining the highest standards of quality across Aerospace, Healthcare, Industrial, and Transportation sectors.</p>
+      
+      <div class="about-stats">
+        <div class="stat-item">
+          <h3>500+</h3>
+          <p>Projects Completed</p>
+        </div>
+        <div class="stat-item">
+          <h3>50+</h3>
+          <p>Expert Engineers</p>
+        </div>
+        <div class="stat-item">
+          <h3>98%</h3>
+          <p>Client Satisfaction</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="industries-section" id="industries">
+  <div class="section-header">
+    <div class="sec-tag">Our Sectors</div>
+    <h2 class="sec-title">Industries We Serve</h2>
+    <p class="sec-subtitle">Specialized expertise across critical industrial domains, delivering precision engineering at scale</p>
+  </div>
+  
+  <div class="industries-grid">
+    <div class="ind-card ind-large ind-1">
+      <div class="ind-bg"></div>
+      <div class="ind-overlay"></div>
+      <div class="ind-content">
+        <span class="ind-num">01</span>
+        <h3 class="ind-title">Industrial</h3>
+        <p class="ind-desc">Heavy machinery, automation systems, and industrial infrastructure engineered for maximum efficiency and reliability.</p>
+      </div>
+    </div>
+    
+    <div class="ind-card ind-medium ind-2">
+      <div class="ind-bg"></div>
+      <div class="ind-overlay"></div>
+      <div class="ind-content">
+        <span class="ind-num">02</span>
+        <h3 class="ind-title">Transportation</h3>
+        <p class="ind-desc">Automotive systems, EV components, and mobility solutions driving the future of transportation.</p>
+      </div>
+    </div>
+    
+    <div class="ind-card ind-small ind-3">
+      <div class="ind-bg"></div>
+      <div class="ind-overlay"></div>
+      <div class="ind-content">
+        <span class="ind-num">03</span>
+        <h3 class="ind-title">Healthcare</h3>
+        <p class="ind-desc">Medical devices and hospital equipment designed with precision for critical care applications.</p>
+      </div>
+    </div>
+    
+    <div class="ind-card ind-small ind-4">
+      <div class="ind-bg"></div>
+      <div class="ind-overlay"></div>
+      <div class="ind-content">
+        <span class="ind-num">04</span>
+        <h3 class="ind-title">Aerospace & Defence</h3>
+        <p class="ind-desc">High-precision components meeting stringent aerospace standards and defence requirements.</p>
+      </div>
+    </div>
+    
+    <div class="ind-card ind-small ind-5">
+      <div class="ind-bg"></div>
+      <div class="ind-overlay"></div>
+      <div class="ind-content">
+        <span class="ind-num">05</span>
+        <h3 class="ind-title">Electromechanical</h3>
+        <p class="ind-desc">Integrated smart systems combining mechanical excellence with electronic innovation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="section-header">
+    <div class="sec-tag">Capabilities</div>
+    <h2 class="sec-title">We Design It. We Build It.</h2>
+    <p class="sec-subtitle">Comprehensive engineering services from concept to production</p>
+  </div>
+  
+  <div class="services-grid">
+    <div class="service-card featured">
+      <div>
+        <span class="service-tag"><i class="fas fa-star"></i> Flagship Service</span>
+        <h3 class="service-title">New Product Development</h3>
+        <p class="service-text">End-to-end development from concept to production. We've delivered 15+ products including garbage compactors, bus interiors, single reduction EVs, and aerospace casting gearboxes.</p>
+      </div>
+      <div class="service-img">
+        <img src="product-development.jpg" alt="Product Development">
+      </div>
+    </div>
+    
+    <div class="service-card">
+      <span class="service-tag">Systems</span>
+      <h3 class="service-title">Material Handling</h3>
+      <p class="service-text">Conveyor systems, SPMs, trolleys, and 90° turnover devices engineered for automotive and warehouse applications.</p>
+      <div class="service-img">
+        <img src="material-handling.jpg" alt="Material Handling">
+      </div>
+    </div>
+    
+    <div class="service-card">
+      <span class="service-tag">Analysis</span>
+      <h3 class="service-title">Reverse Engineering</h3>
+      <p class="service-text">10+ projects completed across aerospace and automotive. Full 3D CAD, BOM, and manufacturing documentation.</p>
+      <div class="service-img">
+        <img src="reverse-engineering.jpg" alt="Reverse Engineering">
+      </div>
+    </div>
+    
+    <div class="service-card">
+      <span class="service-tag">Precision</span>
+      <h3 class="service-title">Aerospace & Defence</h3>
+      <p class="service-text">Forging tool design, 2D to 3D conversion, and assembly tooling with full GD&T compliance.</p>
+      <div class="service-img">
+        <img src="aerospace.jpg" alt="Aerospace">
+      </div>
+    </div>
+    
+    <div class="service-card">
+      <span class="service-tag">Strategy</span>
+      <h3 class="service-title">Should Costing</h3>
+      <p class="service-text">Data-driven cost optimization with 10+ years domain expertise. Transparent cost models validated with stakeholders.</p>
+      <div class="service-img">
+        <img src="costing.jpg" alt="Costing">
+      </div>
+    </div>
+    
+    <div class="service-card">
+      <span class="service-tag">Talent</span>
+      <h3 class="service-title">Staffing & Training</h3>
+      <p class="service-text">High-impact engineering talent acquisition and 6-month intensive training programs with job assurance.</p>
+      <div class="service-img">
+        <img src="staffing.jpg" alt="Training">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="process-container">
+    <div class="process-header">
+      <div class="sec-tag" style="background: rgba(255,255,255,0.1); color: white;">Methodology</div>
+      <h2>Our Engineering Process</h2>
+      <p style="color: rgba(255,255,255,0.7); max-width: 600px; margin: 20px auto 0;">From concept to production, disciplined execution at every step</p>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>Research & Benchmarking</h3>
+        <p>Market analysis and competitive benchmarking to establish optimal design parameters and specifications for your industry.</p>
+        <div class="timeline-img">
+          <img src="costing.jpg" alt="Research">
+        </div>
+      </div>
+      <div class="timeline-dot">
+        <i class="fas fa-search"></i>
+      </div>
+      <div></div>
+    </div>
+    
+    <div class="timeline-item">
+      <div></div>
+      <div class="timeline-dot">
+        <i class="fas fa-lightbulb"></i>
+      </div>
+      <div class="timeline-content">
+        <h3>Concept Development</h3>
+        <p>Architectural layout, feasibility studies, and comprehensive risk assessment protocols to validate your vision.</p>
+        <div class="timeline-img">
+          <img src="concept.jpg" alt="Concept">
+        </div>
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>CAD & DFMA Engineering</h3>
+        <p>Detailed 3D modeling, assembly design, and Design for Manufacturing optimization to ensure producibility.</p>
+        <div class="timeline-img">
+          <img src="cad.jpg" alt="CAD">
+        </div>
+      </div>
+      <div class="timeline-dot">
+        <i class="fas fa-drafting-compass"></i>
+      </div>
+      <div></div>
+    </div>
+    
+    <div class="timeline-item">
+      <div></div>
+      <div class="timeline-dot">
+        <i class="fas fa-vial"></i>
+      </div>
+      <div class="timeline-content">
+        <h3>Analysis & Validation</h3>
+        <p>FEA, thermal analysis, NVH testing, fatigue validation, and performance simulation to ensure reliability.</p>
+        <div class="timeline-img">
+          <img src="reverse-engineering.jpg" alt="Testing">
+        </div>
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>Prototype & Production</h3>
+        <p>Rapid prototyping, FAI validation, tooling design, and manufacturing execution to bring your product to market.</p>
+        <div class="timeline-img">
+          <img src="prototype and production.jpg" alt="Production">
+        </div>
+      </div>
+      <div class="timeline-dot">
+        <i class="fas fa-industry"></i>
+      </div>
+      <div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="cta-content">
+    <h2>Ready to Engineer Something Extraordinary?</h2>
+    <p>Let's discuss your project requirements, feasibility studies, and optimal development strategies tailored to your industry.</p>
+    <a href="https://wa.me/919611391279?text=Hello%20Design%20AID%20Engineering%2C%20I%20am%20interested%20in%20your%20engineering%20services.%20Please%20provide%20more%20information." class="cta-btn" target="_blank">
+      <i class="fab fa-whatsapp"></i> Discuss on WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-left">
+    <h2>Let's Build<br>Together</h2>
+    <p>Ready to transform your concept into reality? Contact us directly via WhatsApp, email, or phone for immediate assistance.</p>
+    
+    <div class="contact-item">
+      <div class="contact-icon">
+        <i class="fas fa-map-marker-alt"></i>
+      </div>
+      <div>
+        <h4>Visit Our Office</h4>
+        <p>Plot #9, 3rd Main, 10th Cross,<br>1st Stage, Peenya Industrial Area,<br>Bengaluru – 560058, India</p>
+      </div>
+    </div>
+    
+    <div class="contact-item">
+      <div class="contact-icon">
+        <i class="fas fa-phone-alt"></i>
+      </div>
+      <div>
+        <h4>Call Us</h4>
+        <p><a href="tel:+919611391279">+91 96113 91279</a></p>
+      </div>
+    </div>
+    
+    <div class="contact-item">
+      <div class="contact-icon">
+        <i class="fas fa-envelope"></i>
+      </div>
+      <div>
+        <h4>Email Us</h4>
+        <p><a href="mailto:info@designaidengg.com">info@designaidengg.com</a></p>
+      </div>
+    </div>
+    
+    <div class="contact-item">
+      <div class="contact-icon">
+        <i class="fab fa-whatsapp"></i>
+      </div>
+      <div>
+        <h4>WhatsApp</h4>
+        <p><a href="https://wa.me/919611391279?text=Hello%20Design%20AID%20Engineering%2C%20I%20am%20interested%20in%20your%20engineering%20services.%20Please%20provide%20more%20information." target="_blank">+91 96113 91279</a></p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="contact-right">
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.1234567890123!2d77.50712345678901!3d13.028123456789012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDAxJzQwLjQiTiA3N8KwMzAnMjUuNiJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-logo">
+      <img src="logo.png.svg.svg" alt="Design AID Engineering">
+    </div>
+    <h3 style="color: white; font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 20px;">Design AID Engineering</h3>
+    <p style="max-width: 600px; margin: 0 auto 30px; line-height: 1.8;">End-to-end engineering excellence. From concept to production, delivering uncompromising quality across Aerospace, Healthcare, Industrial, and Transportation sectors.</p>
+    
+    <div class="social-links">
+      <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+    
+    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; margin-top: 30px;">
+      <p>&copy; 2024 Design AID Engineering. All rights reserved.</p>
+      <p style="margin-top: 10px; font-size: 13px;">
+        <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none; margin: 0 15px;">Privacy Policy</a>
+        <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none; margin: 0 15px;">Terms of Service</a>
+        <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none; margin: 0 15px;">Quality Policy</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 100) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+</script>
+<script src="service-detail.js"></script>
+</body>
+</html>
